@@ -45,4 +45,5 @@ int main() {
         cout << best << endl;
     }
 
-    return 0;}
+    return 0;
+}
