@@ -4,48 +4,42 @@
 #include <sstream>
 using namespace std;
 
-bool canPlaceCows(vector<int>& stalls, int k, int distance) {
-    int cowsPlaced = 1;
-    int lastPosition = stalls[0];
-    
-    for (int i = 1; i < stalls.size(); i++) {
-        if (stalls[i] - lastPosition >= distance) {
-            cowsPlaced++;
-            lastPosition = stalls[i];
-            if (cowsPlaced >= k) {
+bool good(vector<int>& stalls,int k, int distance){
+    int countCows = 1;
+    int lcow = stalls[0];
+
+    for(int i = 0; i < stalls.size(); i++){
+        if (stalls[i] - lcow >=distance){
+            countCows++;
+            lcow = stalls[i];
+            if (countCows == k){
                 return true;
             }
         }
     }
-    
     return false;
 }
 
-int main() {
+int main(){
     int n, k;
-    cin >> n >> k;
-    
+    cin >>n>>k;
     vector<int> stalls(n);
-    for (int i = 0; i < n; i++) {
-        cin >> stalls[i];
+    for (int i =0; i <n; i++){
+        cin >>stalls[i];
     }
     
-    int left = 0;
-    int right = stalls[n - 1] - stalls[0];
-    int answer = 0;
-    
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        
-        if (canPlaceCows(stalls, k, mid)) {
-            answer = mid;
-            left = mid + 1;
-        } else {
-            right = mid - 1;
+    int l = 0;
+    int r = stalls[n-1] - stalls[0]+1;
+    while (r - l > 1){
+        int m = (r+l) /2;
+        if (good(stalls, k, m)){
+            l = m;
+        } else{
+            r = m;
         }
+
     }
-    
-    cout << answer << endl;
-    
+    cout << l;
+
     return 0;
 }

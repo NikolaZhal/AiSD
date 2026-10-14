@@ -20,29 +20,26 @@ int main() {
 
     for (int q = 0; q < k; q++) {
         int target = queries[q];
-        int left = 0;
-        int right = n - 1;
-        int best = arr[0];
+        int r = n;
+        int l = -1;
+        int m;
 
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            int d1 = (int)arr[mid] - target;
-            if (d1 < 0) d1 = -d1;
-            int d2 = (int)best - target;
-            if (d2 < 0) d2 = -d2;
-
-            if (d1 < d2 || (d1 == d2 && arr[mid] < best)) {
-                best = arr[mid];
-            }
-
-            if (arr[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+        while (r - l > 1){
+            m = (r+l)/2;
+            if (arr[m] <= target){
+                l = m;
+            } else{
+                r = m;
             }
         }
+        if (l == -1){l = 0;}
+        if (r == n){r = n-1;}
+        if ( arr[r]- target < target-arr[l]){
+            cout << arr[r]<< endl;
+        } else{
+        cout << arr[l] << endl;
+        }
 
-        cout << best << endl;
     }
 
     return 0;

@@ -20,28 +20,24 @@ int main() {
 
     for (int q = 0; q < k; q++) {
         int target = queries[q];
-        int left = 0;
-        int right = n - 1;
-        bool found = false;
+        int left = -1;
+        int right = n;
 
-        while (left <= right) {
+
+        while (right - left > 1) {
             int mid = (left + right) / 2;
-            if (arr[mid] == target) {
-                found = true;
-                break;
-            }
-            if (arr[mid] < target) {
-                left = mid + 1;
+            if (arr[mid] <= target) {
+                left = mid ;
             } else {
-                right = mid - 1;
+                right = mid;
             }
+        }
+        if (left == -1 || arr[left] != target){
+            cout << "NO" << endl;
+        } else {
+            cout << "YES"<< endl;
         }
 
-        if (found) {
-            cout << "YES" << endl;
-        } else {
-            cout << "NO" << endl;
-        }
     }
 
     return 0;

@@ -3,7 +3,18 @@
 #include <string>
 #include <sstream>
 using namespace std;
-
+bool good(vector<int>& ropes,int k, int length){
+    if (length==0){return true;}
+    int count = 0;
+  
+    for(int i = 0; i < ropes.size(); i++){
+        count += ropes[i] / length;
+        if (count >= k){
+            return true;
+        }
+    }
+    return false;
+}
 int main() {
     int n;
     int k;
@@ -11,34 +22,26 @@ int main() {
     cin >> n >> k;
 
     vector<int> ropes(n);
-    int max_len = 0;
+    int r = 0;
     for (int i = 0; i < n; i++) {
         cin >> ropes[i];
-        if (ropes[i] > max_len) {
-            max_len = ropes[i];
+        if (ropes[i] > r) {
+            r = ropes[i];
         }
     }
-
-    int left = 1;
-    int right = max_len;
-    int answer = 0;
-
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            count += ropes[i] / mid;
+    r++;
+    int l=0;
+    while (r - l > 1){
+        int m = (r + l)/2;
+        if (good(ropes, k, m)){
+            l=m;
+        } else{
+            r =m;
         }
 
-        if (count >= k) {
-            answer = mid;
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
     }
+    cout << l;
 
-    cout << answer << endl;
 
     return 0;
 }

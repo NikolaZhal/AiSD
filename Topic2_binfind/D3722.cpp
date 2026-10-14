@@ -9,11 +9,11 @@ int main() {
     double a, b, c, d;
     cin >> a >> b >> c >> d;
 
-    double left = -100000.0;
-    double right = 100000.0;
+    double left = -100000;
+    double right = 100000;
 
     for (int i = 0; i < 100; i++) {
-        double mid = (left + right) / 2.0;
+        double mid = (left + right) / 2;
         double f_mid = a * mid * mid * mid + b * mid * mid + c * mid + d;
         
         if (a > 0) {
@@ -31,7 +31,7 @@ int main() {
         }
     }
 
-    cout << fixed << setprecision(15) << (left + right) / 2.0 << endl;
+    cout << fixed << setprecision(15) << (left + right) / 2 << endl;
 
     return 0;
 }

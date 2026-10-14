@@ -4,35 +4,29 @@
 #include <sstream>
 using namespace std;
 
-int main() {
+bool good(int n, int a, int b, int t){
+    t = t -a;
+    if (t < 0){return false;}
+    n--;
+    return n <= (t / a + t/ b);
+}
+
+int main (){
     int n, x, y;
     cin >> n >> x >> y;
-
-    if (n == 1) {
-        cout << (x < y ? x : y) << endl;
-        return 0;
-    }
-
-    int first_copy_time = (x < y ? x : y);
-    int n_remaining = n - 1;
-
-    int left = 0;
-    int right = n_remaining * first_copy_time;
-    int ans = right;
-
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        int copies = mid / x + mid / y;
-
-        if (copies >= n_remaining) {
-            ans = mid;
-            right = mid - 1;
+    int a = (x > y ? y : x);
+    int b = (x < y ? y : x);
+    int l = 0;
+    int r = b * n;
+    while (r - l > 1){
+        int m = (r + l)/2;
+        if (good(n, a, b, m)){
+            r = m;
         } else {
-            left = mid + 1;
+            l = m;
         }
+        
     }
-
-    cout << first_copy_time + ans << endl;
-
+    cout << r;
     return 0;
 }

@@ -7,11 +7,11 @@ int main() {
     double c;
     cin >> c;
 
-    double left = 0.0;
-    double right = 100000.0;
+    double left = 0;
+    double right = 1000000;
 
     for (int i = 0; i < 100; i++) {
-        double mid = (left + right) / 2.0;
+        double mid = (left + right) / 2;
         if (mid * mid + sqrt(mid) < c) {
             left = mid;
         } else {
@@ -19,7 +19,7 @@ int main() {
         }
     }
 
-    cout << fixed << setprecision(9) << (left + right) / 2.0 << endl;
+    cout << fixed << setprecision(9) << (left + right) / 2 << endl;
 
     return 0;
 }

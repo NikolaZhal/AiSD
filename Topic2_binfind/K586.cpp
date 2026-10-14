@@ -21,11 +21,10 @@ int main() {
         cin >> t[i] >> z[i] >> y[i];
     }
 
-    int left = 0;
+    int left = -1;
     int right = 3000000;
-    int ans_time = right;
 
-    while (left <= right) {
+    while (right - left >1) {
         int mid = (left + right) / 2;
         int total = 0;
         for (int i = 0; i < n; i++) {
@@ -34,18 +33,17 @@ int main() {
         }
 
         if (total >= m) {
-            ans_time = mid;
-            right = mid - 1;
+            right = mid;
         } else {
-            left = mid + 1;
+            left = mid;
         }
     }
 
-    cout << ans_time << endl;
+    cout << right << endl;
 
     int remaining = m;
     for (int i = 0; i < n; i++) {
-        int max_b = count_balloons(ans_time, t[i], z[i], y[i]);
+        int max_b = count_balloons(right, t[i], z[i], y[i]);
         int take = max_b < remaining ? max_b : remaining;
         cout << take << " ";
         remaining -= take;
