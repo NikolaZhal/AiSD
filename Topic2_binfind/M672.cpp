@@ -1,7 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#include <sstream>
 using namespace std;
 
 int main() {
@@ -17,12 +15,12 @@ int main() {
         }
     }
 
-    int left = 1;
-    int right = max_len;
-    int answer = 0;
+    int left = 0;           
+    int right = max_len + 1;
 
-    while (left <= right) {
-        int mid = (left + right) / 2;
+    while (right - left > 1) {
+        int mid = left + (right - left) / 2;
+
         int count = 0;
         for (int i = 0; i < n; i++) {
             count += wires[i] / mid;
@@ -32,14 +30,13 @@ int main() {
         }
 
         if (count >= k) {
-            answer = mid;
-            left = mid + 1;
+            left = mid;   
         } else {
-            right = mid - 1;
+            right = mid;  
         }
     }
 
-    cout << answer << endl;
+    cout << left << endl; 
 
     return 0;
 }

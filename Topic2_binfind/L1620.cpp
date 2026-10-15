@@ -14,11 +14,10 @@ int main() {
 
     sort(h.begin(), h.end());
 
-    int left = 0;
+    int left = -1;              
     int right = h[n - 1] - h[0];
-    int ans = right;
 
-    while (left <= right) {
+    while (right - left > 1) {
         int mid = left + (right - left) / 2;
 
         int count = 0;
@@ -33,14 +32,13 @@ int main() {
         }
 
         if (count >= r) {
-            ans = mid;
-            right = mid - 1;
+            right = mid;    
         } else {
-            left = mid + 1;
+            left = mid;     
         }
     }
 
-    cout << ans << endl;
+    cout << right << endl;
 
     return 0;
 }
